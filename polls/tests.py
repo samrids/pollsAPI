@@ -16,7 +16,7 @@ class TestPoll(APITestCase):
 
     @staticmethod
     def setup_user():
-        # apenas para criar o usuário
+        # Create the user
         User = get_user_model()
         return User.objects.create_user(
             'test',
@@ -25,8 +25,8 @@ class TestPoll(APITestCase):
         )
 
     def test_list2(self):
-        # Usando APIClient
-        # autenticando o usuário
+        # use APIClient
+        # Authentication
         self.client.login(username="test", password="test")
         # pegando o response do get na uri
         response = self.client.get(self.uri)
@@ -35,7 +35,7 @@ class TestPoll(APITestCase):
                          .format(response.status_code))
 
     def test_list(self):
-        # Usando APIRequestFactory
+        # use APIRequestFactory
         request = self.factory.get(self.uri)
         request.user = self.user
         response = self.view(request)
